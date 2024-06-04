@@ -3,6 +3,7 @@ from textual.containers import Horizontal, VerticalScroll
 from textual.screen import Screen
 from textual.widgets import Placeholder, Static
 
+# Esto es una prueba
 
 class Header(Placeholder):
     DEFAULT_CSS = """
