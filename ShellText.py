@@ -1,7 +1,7 @@
 from textual.app import App, ComposeResult
 from textual.containers import Horizontal, VerticalScroll
 from textual.screen import Screen
-from textual.widgets import Static, TextArea, Placeholder, Tree
+from textual.widgets import Static, TextArea, Placeholder
 
 __version__ = '0.0.2'
 
