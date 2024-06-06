@@ -1,8 +1,9 @@
 from textual.app import App, ComposeResult
 from textual.containers import Horizontal, VerticalScroll
 from textual.screen import Screen
-from textual.widgets import Placeholder, Static
+from textual.widgets import Static, TextArea, Placeholder, Tree
 
+__version__ = '0.0.2'
 
 class Header(Placeholder):
     DEFAULT_CSS = """
@@ -13,7 +14,6 @@ class Header(Placeholder):
     }
     """
 
-
 class Footer(Placeholder):
     DEFAULT_CSS = """
     Footer {
@@ -23,38 +23,38 @@ class Footer(Placeholder):
     }
     """
 
-class Menu(Placeholder):
+class Menu(Static):
     DEFAULT_CSS = """
     Menu {
         width: 32;
         dock: left;
-        background: green;
+        background: red 30%;
+        height: 100%;
     }
     """
-
-TEXT = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-"""
 
 class MainContent(VerticalScroll):
     DEFAULT_CSS = """
     MainContent {
-        background: white;
-        color: black;
+        # background: grey;
+        color: white;
+        height: auto;
     }
     """
+    def compose(self) -> ComposeResult:
+        yield TextArea(id="body")
 
-class TweetScreen(Screen):
+class AppScreen(Screen):
     def compose(self) -> ComposeResult:
         yield Header(id="header")
         yield Footer(id="footer")
         with Horizontal():
             yield Menu(id="menu")
-            yield MainContent(Static(TEXT * 10, id="body"), id="main_content")
+            yield MainContent(id="main_content")
 
 class LayoutApp(App):
     def on_ready(self) -> None:
-        self.push_screen(TweetScreen())
+        self.push_screen(AppScreen())
 
 if __name__ == "__main__":
     app = LayoutApp()
